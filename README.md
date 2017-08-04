@@ -1,5 +1,5 @@
 # simpleMPIPOC
-Templates and scripts for deploying a Master Node which serves as an NFS Server and a JumpBox to the Compute Nodes.  It will also deploy the compute nodes to a VM Scale Set. All the machines are built using Managed Storage.
+Templates and scripts for deploying a Master Node which serves as an NFS Server and a JumpBox to the Compute Nodes.  It will also deploy the compute nodes to a VM Scale Set. All the machines are built using Managed Storage.  The VMSS has been changed to deploy from a Managed Image file created from a customized VM.
 
 It will provision an isolated VNet with a Public IP address on the Master machine.
 
