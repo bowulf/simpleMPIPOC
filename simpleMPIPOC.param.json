@@ -11,11 +11,10 @@
     "CompNodeVMsku": { "value": "Standard_H16r" },
     "computeNodeImage": { "value": "CentOS-HPC_7.1" },
     "computeNodeCount": { "value": 2 },
-    "adminUsername": { "value": "sample" },
-    "adminPassword": { "value": "" },
     "existingManagedImageResourceGroup": { "value": "" },
     "existingManagedImageName": { "value": "" },
-    "osType": { "value": "Linux" },
+    "adminUsername": { "value": "sample" },
+    "adminPassword": { "value": "" },
     "sshKeyData": { "value": "" }
   }
 }
