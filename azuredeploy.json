@@ -85,26 +85,17 @@
         "description": "Instance type to use for the compute nodes"
       }
     },
-     "osType": {
+    "computeNodeImage": {
       "type": "string",
+      "defaultValue": "CentOS-HPC_7.1",
       "allowedValues": [
-        "Windows",
-        "Linux"
+        "CentOS_6.7",
+        "CentOS_7.2",
+        "CentOS-HPC_7.1",
+        "RHEL_7.2"
       ],
       "metadata": {
-        "description": "The operating system type of the private OS image."
-      }
-    },
-     "existingManagedImageResourceGroup": {
-      "type": "string",
-      "metadata": {
-        "description": "The name of the Resource Group containing the Image that instances of the VM Scale Set will be created from. Images can be created by capturing Azure VMs."
-      }
-    },
-    "existingManagedImageName": {
-      "type": "string",
-      "metadata": {
-        "description": "The name of the Image that instances of the VM Scale Set will be created from. Images can be created by capturing Azure VMs."
+        "description": "The VM image of the compute nodes"
       }
     },
     "computeNodeCount": {
@@ -119,6 +110,18 @@
       "type": "string",
       "metadata": {
         "description": "User name for the Virtual Machine."
+      }
+    },
+    "existingManagedImageResourceGroup": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the Resource Group containing the Image that instances of the VM Scale Set will be created from. Images can be created by capturing Azure VMs."
+      }
+    },
+    "existingManagedImageName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the Image that instances of the VM Scale Set will be created from. Images can be created by capturing Azure VMs."
       }
     },
     "authenticationType": {
@@ -184,6 +187,7 @@
     "publicIPDomainName": "[variables('namingInfix')]",
     "osType": "linux",
     "MasterimageReference": "[variables('computeImages')[parameters('masterImage')]]",
+    "managedImageId": "[resourceId(parameters('existingManagedImageResourceGroup'), 'Microsoft.Compute/images', parameters('existingManagedImageName'))]",
     "sshKeyPath": "[concat('/home/',parameters('adminUserName'),'/.ssh/authorized_keys')]",
     "computeImages": {
       "CentOS_6.7": {
@@ -217,7 +221,7 @@
         "version": "latest"
       }
     },
-    "managedImageId": "[resourceId(parameters('existingManagedImageResourceGroup'), 'Microsoft.Compute/images', parameters('existingManagedImageName'))]",
+
     "linuxConfiguration_sshPublicKey": {
       "disablePasswordAuthentication": "true",
       "ssh": {
@@ -492,7 +496,6 @@
         }
       }
     },
-    
 
 
     {
@@ -541,7 +544,7 @@
             "adminPassword": "[parameters('adminPassword')]",
             "linuxConfiguration": "[variables('linuxConfiguration')]"
           },
-         "storageProfile": {
+          "storageProfile": {
             "imageReference": {
               "id": "[variables('managedImageId')]"
             }
